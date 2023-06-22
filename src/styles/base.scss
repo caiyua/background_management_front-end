@@ -1,0 +1,314 @@
+@charset "UTF-8";
+html,
+body,
+div,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+main,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+select,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: initial;
+	vertical-align: baseline;
+	background: transparent;
+	-webkit-tap-highlight-color: transparent;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+	display: block;
+}
+body {
+	padding: 0;
+	margin: 0 auto !important;
+	font-size: 16px;
+	line-height: 1.4;
+	color: #000;
+	min-width: 320px;
+	width: 100%;
+	background: #fff;
+	overflow-x: hidden;
+	-webkit-text-size-adjust: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-font-smoothing: antialiased;
+}
+* {
+	-webkit-tap-highlight-color: transparent;
+	box-sizing: border-box;
+}
+p,
+span {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent;
+	-webkit-tap-highlight-color: transparent;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+i {
+	font-weight: normal;
+	font-style: normal;
+}
+ul,
+ol,
+li {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+	outline: none;
+	color: #000;
+	cursor: pointer;
+}
+a:focus {
+	outline: none;
+}
+a img {
+	border: none;
+}
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+/* 以上为基础样式————————————————————————————————————————————————————————————————————————————————————————以上为基础样式 */
+.flex {
+	display: flex;
+}
+.f_center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.j_between {
+	justify-content: space-between;
+}
+.f_column {
+	flex-direction: column;
+}
+.f_row {
+	flex-direction: row;
+}
+.j_end {
+	justify-content: flex-end;
+}
+.j_start {
+	justify-content: flex-start;
+}
+.j_between {
+	justify-content: space-between;
+}
+.j_around {
+	justify-content: space-around;
+}
+.a_start {
+	align-items: flex-start;
+}
+.a_end {
+	align-items: flex-end;
+}
+.a_center {
+	align-items: center;
+}
+/* 处理图片 */
+.pb {
+	width: 100%;
+	height: 0;
+	padding-bottom: 100%;
+	position: relative;
+}
+.ab {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: 0;
+	text-align: center;
+}
+.imgmid {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+	height: 100%;
+	width: 1px;
+	margin-left: -1px;
+	vertical-align: middle;
+	font-size: 0;
+}
+/* 定位居中 */
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+}
+.center_h {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+}
+.center_v {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+}
+/* 功能样式 */
+@mixin text_overflow($num) {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: unit($num);
+	overflow: hidden;
+}
+@mixin dh($time) {
+	transition: all #{$time}s;
+}
+@mixin fd($size) {
+	transform: scale($size);
+}
+@mixin imgfd($size) {
+	transform: translate(-50%, -50%) scale($size);
+}
+@mixin xz($size) {
+	transform: rotate(#{$size}deg);
+}
+/* 动画关键帧——无限旋转 */
+@keyframes run {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+@keyframes run2 {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
+}
+// 无限旋转2
+@keyframes tran_run {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+@keyframes tran_run2 {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(-360deg);
+	}
+}
+// 显示隐藏
+@keyframes show {
+	0% {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+}
+// 放大缩小
+@keyframes fd {
+	0% {
+		@include fd(1);
+	}
+	100% {
+		@include fd(1.05);
+	}
+}
+
+svg {
+	outline: none;
+}
