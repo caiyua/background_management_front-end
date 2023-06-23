@@ -1,5 +1,7 @@
 <style scoped lang="scss"></style>
 
-<template>创建文章</template>
+<template>
+	<div class="article-ranking">文章排名</div>
+</template>
 
 <script setup></script>

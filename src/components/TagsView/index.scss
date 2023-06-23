@@ -1,0 +1,10 @@
+.tags-view-container { padding: 0 0 20px 0;background-color: var(--theme-navbar-bgc); @extend .flex; @extend .a_center;
+	.tag-view-item { padding: 6px 15px; border: 1px dashed var(--theme-tag-border); margin: 0 5px; border-radius: 3px;color: #777; @extend .flex; @extend .a_center;position: relative;}
+	.tag-view-item.active { background-color: #0087ff;color: #fff;border: none;padding: 7px 15px;
+		&::before { content: '';width: 8px;height: 8px;background-color: #fff;border-radius: 50%;margin-right: 8px;}
+	}
+	.line-tag { flex: auto; margin-left: 10px;border-top: 1px dashed var(--theme-tag-border);}
+	.el-icon { width: 15px;height: 15px;font-size: 12px; margin-left: 5px; @extend .f_center;border-radius: 50%;padding: 3px;@include dh(.3);
+		&:hover { background-color: #aaa;color: #fff;}
+	}
+}

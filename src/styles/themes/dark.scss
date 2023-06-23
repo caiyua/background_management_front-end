@@ -1,3 +1,12 @@
 html.dark {
-	--theme-bgc: #222;
+	--theme-ele-hover-bgc: rgba(255,255,255,.1);
+	--theme-sidebar-bgc: #000; // 侧边导航栏背景色
+	--theme-navbar-bgc: #000; // 顶部导航栏背景色
+	--theme-tooltip-text-color: #fff; // tooltip文字颜色
+	--theme-tooltip-bgc: #111; // tooltip文字背景
+	--theme-tag-border: #333; // tag边框颜色
+	--theme-main-bgc: #222; // 主要内容区背景颜色
+	--main-content-bgc: #000; // 主要内容区的内容区颜色
+	--login-bgc: #000; // login页背景色
+	--login-h1-color: #fff; // login-标题颜色
 }

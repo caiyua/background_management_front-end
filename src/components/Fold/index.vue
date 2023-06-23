@@ -21,7 +21,7 @@
 			:hide-after="0"
 		>
 			<div class="fold_container">
-				<SvgIcon :name="idFold" width="22px" height="22px" />
+				<SvgIcon :name="idFold" width="22px" height="22px" id="guide-fold"/>
 			</div>
 		</el-tooltip>
 	</div>

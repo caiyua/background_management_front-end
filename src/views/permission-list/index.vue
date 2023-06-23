@@ -1,5 +1,7 @@
 <style scoped lang="scss"></style>
 
-<template>权限列表</template>
+<template>
+	<div class="permission-list">权限列表</div>
+</template>
 
 <script setup></script>

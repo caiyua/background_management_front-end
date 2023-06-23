@@ -1,7 +1,7 @@
 .lang-container {
 	.el-dropdown {
 		.lang-icon { padding: 10px;@include dh(.3);border-radius: 10px;cursor: pointer;
-			&:hover { background-color: rgba(0,0,0,.05);}
+			&:hover { background-color: var(--theme-ele-hover-bgc);}
 		}
 	}
 }

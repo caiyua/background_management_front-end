@@ -1,6 +1,10 @@
-.navbar-wrapper { width: 100%;height: 100%;@extend .flex;@extend .j_between;@extend .a_center;
-	.left { @extend .f_center;}
+.navbar-wrapper { width: 100%;height: 70px;@extend .flex;@extend .j_between;@extend .a_center;
+	.left { @extend .f_center;
+		.fold-outer-layer { margin-right: 15px;}
+	}
 	.right { @extend .flex; @extend .a_center;
 		.lang-container { margin-right: 15px;}
+		.search-container { margin-right: 15px;}
+		.theme-container { margin-right: 15px;}
 	}
 }

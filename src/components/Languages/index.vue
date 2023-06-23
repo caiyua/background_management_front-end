@@ -6,7 +6,7 @@
 	<div class="lang-container">
 		<el-dropdown class="el-dropdown" @command="toggleLang">
 			<div class="lang-icon">
-				<SvgIcon name="language" width="25px" height="25px" />
+				<SvgIcon name="language" width="25px" height="25px" id="guide-lang"/>
 			</div>
 			<template #dropdown>
 				<el-dropdown-menu>

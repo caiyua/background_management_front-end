@@ -1,0 +1,21 @@
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+	@include dh(.5)
+}
+
+.breadcrumb-enter-from,
+.breadcrumb-leave-active {
+	opacity: 0;
+	transform: translateX(50px);
+}
+
+.breadcrumb-leave-active {
+	position: absolute;
+}
+/*******************************************/
+
+.crumbs_container {
+	.breadcrumb {
+		.el-breadcrumb__item { cursor: pointer;}
+	}
+}

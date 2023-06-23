@@ -2,6 +2,7 @@
 .el-menu-vertical-demo:not(.el-menu--collapse) {
 	width: 200px;
 }
+.sidebar-wrapper { background-color: var(--theme-sidebar-bgc);}
 </style>
 
 <template>

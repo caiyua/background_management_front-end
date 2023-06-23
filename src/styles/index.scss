@@ -2,3 +2,7 @@
 @import './base.scss';
 /* 主题样式 */
 @import './themes/index.scss';
+/* 动画样式 */
+@import "./transition.scss";
+/* 覆盖样式 */
+@import "./cover.scss";

@@ -1,5 +1,7 @@
 <style scoped lang="scss"></style>
 
-<template>文章创建</template>
+<template>
+	<div class="article-create">创建文章</div>
+</template>
 
 <script setup></script>

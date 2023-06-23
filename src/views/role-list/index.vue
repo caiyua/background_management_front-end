@@ -1,5 +1,7 @@
 <style scoped lang="scss"></style>
 
-<template>角色列表</template>
+<template>
+	<div class="role-list">角色列表</div>
+</template>
 
 <script setup></script>

@@ -1,0 +1,11 @@
+.search-container { @extend .flex;@extend .a_center;
+	.search-icon { padding: 12px; @include dh(0.3);@extend .f_center;border-radius: 10px;cursor: pointer;
+		&:hover { background-color: var(--theme-ele-hover-bgc); }
+	}
+	.search-select { width: 0;@include dh(.5);font-size: 12px;
+		:deep(.el-input__wrapper) { box-shadow: none !important;border-radius: 0;padding: 0;border-bottom: 1px solid #ccc;
+			.el-input__inner { font-size: 14px;}
+		}
+	}
+	.search-select-active { width: 150px;margin-right: 15px;}
+}

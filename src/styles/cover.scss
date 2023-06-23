@@ -1,0 +1,10 @@
+// 黑色遮罩
+#driver-page-overlay { opacity: .85 !important;}
+// 高亮指向区样式（无法通过样式让元素无法选中，因为这个口子是已经开好了的，css只是负责高亮多少，高亮范围。
+div#driver-highlighted-element-stage {}
+div#driver-popover-item { padding: 20px !important;
+	// 标题样式
+	.driver-popover-title { border-bottom: 1px solid #333;padding-bottom: 3px;display: inline-block !important;}
+	// 介绍文字样式
+	.driver-popover-description { margin: 5px 0 15px 0 !important;}
+}

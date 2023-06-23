@@ -4,6 +4,7 @@
 
 <template>
 	<div class="login-container">
+		<Theme />
 		<Languages :reload="true" />
 		<div class="login-wrapper">
 			<el-form :model="loginForm" :rules="rules" scroll-to-error>
@@ -34,6 +35,7 @@
 </template>
 
 <script setup>
+import Theme from '@/components/Theme/index.vue'
 import Languages from '@/components/Languages/index.vue'
 import { ref, watch } from 'vue'
 import { useLoginStore } from '@/stores/user/login'

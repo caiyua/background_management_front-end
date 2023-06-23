@@ -1,5 +1,7 @@
 <style scoped lang="scss"></style>
 
-<template>文章详情</template>
+<template>
+	<div class="article-detail">文章详情</div>
+</template>
 
 <script setup></script>

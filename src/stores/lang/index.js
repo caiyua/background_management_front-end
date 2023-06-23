@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { getItem, setItem } from '@/utils/storage'
 import { LANG } from '@/constant'
 
-export const useLangStore = defineStore('zhCn', {
+export const useLangStore = defineStore('lang', {
 	state: () => ({
 		language: getItem(LANG) || 'zhCn',
 	}),

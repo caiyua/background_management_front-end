@@ -1,3 +1,11 @@
 :root {
-	--theme-bgc: #eee;
+	--theme-ele-hover-bgc: rgba(0,0,0,.03);
+	--theme-main-bgc: #efefef; // 主要内容区背景颜色
+	--theme-tooltip-text-color: #000; // tooltip文字颜色
+	--theme-tooltip-bgc: #fff; // tooltip文字背景
+	--theme-navbar-bgc: #fff; // 顶部导航栏背景色
+	--theme-tag-border: #ccc; // tag边框颜色
+	--main-content-bgc: #fff; // 主要内容区的内容区颜色
+	--login-bgc: #efefef; // login页背景色
+	--login-h1-color: #000; // login-标题颜色
 }
