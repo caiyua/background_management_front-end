@@ -1,0 +1,9 @@
+.pan-thumb-container { width: 100%;height: auto;@extend .flex;@extend .f_column;@extend .a_center;
+	.thumb-wrapper { @extend .f_center;@extend .f_column;position: relative; cursor: pointer;
+		.el-avatar--circle { position: absolute;top: 0;width: 150px;height: 150px;z-index: 2;@include dh(.5);}
+		.hide-img { width: 150px;height: 150px;border-radius: 50%;pointer-events: none;}
+		&:hover {
+			.el-avatar--circle { transform: scale(0) rotate(360deg);opacity: .3;}
+		}
+	}
+}

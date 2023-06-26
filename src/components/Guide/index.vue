@@ -3,7 +3,7 @@
 </style>
 
 <template>
-	<el-tooltip content="了解应用功能">
+	<el-tooltip content="了解应用功能" effect="light">
 		<div class="guide-container" @click="onClick">
 			<SvgIcon name="guide" width="25px" height="25px" id="guide-start" />
 		</div>

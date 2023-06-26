@@ -1,0 +1,10 @@
+.profile-container {
+	.el-row {
+		.el-col {
+			.el-card { box-shadow: none !important;border: 1px solid var(--profile-card-border);}
+			.project-card-container {
+				.el-card { box-shadow: none !important;}
+			}
+		}
+	}
+}
