@@ -1,0 +1,13 @@
+.upload-excel-container { width: 100%; height: 100%; @extend .f_center;
+	.upload-excel-wrapper { width: 100%;height: 300px;@extend .flex;@extend .f_center;
+		.btn-upload { width: 30%;border: 1px dashed var(--theme-tag-border);height: 100%;@extend .f_center;
+			.el-button { width: auto;height: 50px;padding: 0 30px;}
+		}
+		.excel-upload-input { display: none;}
+		.or { font-size: 12px;margin: 0 10px;}
+		.drop { width: 30%; border: 1px dashed var(--theme-tag-border);height: 100%;@extend .f_center; @extend .f_column;
+			.up-icon { font-size: 68px;color: #ccc;}
+			span { color: #ccc;font-size: 14px;}
+		}
+	}
+}

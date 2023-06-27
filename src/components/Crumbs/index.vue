@@ -34,7 +34,6 @@ const getBreadcrumbData = () => {
 
 // 监听路由变化
 const route = useRoute()
-console.log(route)
 watch(
 	route,
 	() => {
