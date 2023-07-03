@@ -6,7 +6,7 @@ export default {
 		userVerifyLength: 'Username must be 3 to 8 characters long',
 		passwordPlaceholder: 'Password',
 		passwordVerifyRequired: 'Please enter your password',
-		passwordVerifyLength: 'Password must be 6 to 12 characters long',
+		passwordVerifyLength: 'Password must be 6 to 18 characters long',
 		elButtonText: 'Log In',
 	},
 	navbar: {

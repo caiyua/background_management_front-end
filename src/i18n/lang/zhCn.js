@@ -6,7 +6,7 @@ export default {
 		userVerifyLength: '用户名长度为3~8个',
 		passwordPlaceholder: '密码',
 		passwordVerifyRequired: '请输入密码',
-		passwordVerifyLength: '密码长度为6~12个',
+		passwordVerifyLength: '密码长度为6~18个',
 		elButtonText: '登录',
 	},
 	navbar: {

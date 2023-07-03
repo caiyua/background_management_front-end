@@ -2,7 +2,9 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { useLoginStore } from '@/stores/user/login'
-import { isCheckTimeout } from '@/utils/auth' // 这个做一个好看的交互效果，
+import { isCheckTimeout } from '@/utils/auth'
+import { getItem } from '@/utils/storage'
+import { TOKEN } from '@/constant' // 这个做一个好看的交互效果，
 
 // 运行axios这个对象上的create方法。然后传了一个对象，这个对象里可以写很多属性（也就是很多配置）
 const request = axios.create({
@@ -24,9 +26,10 @@ request.interceptors.request.use((config) => {
 		config.headers = config.headers || {}
 		config.headers.common = config.headers.common || {}
 		// 配置请求头
-		config.headers.common['Authorization'] = window.sessionStorage.getItem('token')
+		config.headers.common['Authorization'] = getItem(TOKEN)
 		if (isCheckTimeout()) {
 			loginStore.logout()
+			ElMessage.error('token过期，请重新登录')
 		}
 	}
 	return config
@@ -36,8 +39,8 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use((response) => {
 	// 获取接口返回结果
 	const res = response.data
-	if (res.success) {
-		return res.data // 这里的数据就是组件中请求直接返回的res
+	if (res.status === 200) {
+		return res // 这里的数据就是组件中请求直接返回的res
 	} else {
 		setTimeout(() => {
 			ElMessage.error('网络请求异常，请稍后再试')

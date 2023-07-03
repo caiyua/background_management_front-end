@@ -1,14 +1,5 @@
 <style scoped lang="scss">
-:deep(.el-dropdown) {
-	width: auto;
-	height: auto;
-	.avatar_wrapper {
-		.el-avatar {
-			img {
-			}
-		}
-	}
-}
+@import 'index';
 </style>
 
 <template>
@@ -60,8 +51,12 @@ const handleLogout = () => {
 }
 //endregion
 
-onMounted(async () => {
-	await loginStore.fetchUserinfo()
-	console.log()
+onMounted(() => {
+	/*
+	 * 服务器接收不到请求，不知道是哪的问题，干脆登录的时候把用户信息存入本地存储。
+	 * 这样每次刷新也不会看到右上角的头像会频繁显示/消失
+	 * 不行，还是得研究下这个为什么接收到。
+	 * */
+	loginStore.fetchUserinfo()
 })
 </script>

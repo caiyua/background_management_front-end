@@ -38,4 +38,5 @@ export default defineConfig({
 			},
 		},
 	},
+	base: './', // 打包相对路径
 })

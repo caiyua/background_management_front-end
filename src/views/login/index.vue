@@ -7,7 +7,7 @@
 		<Theme />
 		<Languages :reload="true" />
 		<div class="login-wrapper">
-			<el-form :model="loginForm" :rules="rules" scroll-to-error>
+			<el-form ref="ruleFormRef" :model="loginForm" :rules="rules" scroll-to-error>
 				<div class="title">
 					<h1>{{ $t('login.title') }}</h1>
 				</div>
@@ -26,10 +26,18 @@
 						type="password"
 					/>
 				</el-form-item>
-				<el-button class="el-button" @click="getLogin" :disabled="isBtnClick" :loading="isBtnClick">
+				<el-button
+					class="el-button"
+					@click="submitForm(ruleFormRef)"
+					:disabled="isBtnClick"
+					:loading="isBtnClick"
+				>
 					{{ $t('login.elButtonText') }}</el-button
 				>
 			</el-form>
+			<span style="font-size: 12px; color: #bbb; text-align: center; display: block; margin-top: 10px"
+				>用户名 admin 密码 123123</span
+			>
 		</div>
 	</div>
 </template>
@@ -52,7 +60,7 @@ const loginStore = useLoginStore()
 
 // 表单数据源
 const loginForm = ref({
-	username: '',
+	username: 'admin',
 	password: '',
 })
 
@@ -64,25 +72,32 @@ const rules = ref({
 	],
 	password: [
 		{ required: true, message: passwordVerifyRequired },
-		{ min: 6, max: 12, message: passwordVerifyLength },
+		{ min: 6, max: 18, message: passwordVerifyLength },
 	],
 })
 
 // 2. 发送登录请求
-const getLogin = async () => {
-	isBtnClick.value = true
-
-	await loginStore
-		.sendLogin()
-		.then(() => {
-			if (loginStore.token !== '') {
-				isBtnClick.value = false
-				router.push('/')
-			}
-		})
-		.catch((err) => {
-			console.log(err, '报错了')
-		})
+const ruleFormRef = ref(null)
+const submitForm = async (formEl) => {
+	if (!formEl) return
+	await formEl.validate((valid, fields) => {
+		if (valid) {
+			isBtnClick.value = true
+			loginStore.sendLogin(loginForm.value).then((res) => {
+				// 登录成功后返回了200，失败返回401
+				if (res.status && res.status === 200) {
+					isBtnClick.value = false
+				}
+				if (res.status && res.status === 401) {
+					setTimeout(() => {
+						isBtnClick.value = false
+					}, 1500)
+				}
+			})
+		} else {
+			console.log('表单验证失败！', fields)
+		}
+	})
 }
 
 // 按钮可点击状态

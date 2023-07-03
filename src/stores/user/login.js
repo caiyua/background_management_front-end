@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { getItem, removeAllItem, setItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
-import { queryLoginApi, queryUserinfoApi } from '@/api/user/login'
+import { postLoginApi, queryUserinfoApi } from '@/api/user/login'
 import { setTimeStamp } from '@/utils/auth'
 import router from '@/router'
 
@@ -12,38 +12,41 @@ export const useLoginStore = defineStore('login', {
 	}),
 	actions: {
 		// 登进
-		async sendLogin() {
+		async sendLogin(loginForm) {
 			try {
-				const data = await queryLoginApi()
-				const { token } = data
-				this.token = token
-				// 存储token
-				setItem(TOKEN, this.token)
-				// 存储时间戳
-				setTimeStamp()
-				// 获取用户信息
-				await this.fetchUserinfo()
+				const res = await postLoginApi(loginForm)
+				this.token = res.data.token
+				setItem(TOKEN, this.token) // 存token
+				setTimeStamp() // 存时间戳
+				this.userinfo = res.data.userinfo
+				await router.push('/')
+				ElMessage.success('欢迎回来！' + this.userinfo.username)
+				return { status: 200 }
 			} catch (err) {
-				ElMessage.error({ message: '登录失败...' })
-				throw err
+				if (err.response && err.response.status === 401) {
+					ElMessage.error('用户名或密码错误')
+					return { status: 401 }
+				}
 			}
 		},
 		// 登出
-		logout() {
+		async logout() {
 			this.token = ''
 			removeAllItem()
-			router.push('/login').then(() => {
-				console.log('已登出，请重新登录！')
-			})
+			await router.push('/login')
 		},
 		// 获取用户信息
 		async fetchUserinfo() {
-			try {
-				this.userinfo = await queryUserinfoApi()
-			} catch (err) {
-				ElMessage.error({ message: '获取用户信息失败...' })
-				throw err
-			}
+			// try {
+			// 	this.userinfo = await queryUserinfoApi()
+			// 	console.log(this.userinfo)
+			// } catch (err) {
+			// 	console.log(err)
+			// 	ElMessage.error({ message: '获取用户信息失败...' })
+			// 	throw err
+			// }
+			const res = await queryUserinfoApi()
+			console.log(res)
 		},
 	},
 })
