@@ -12,7 +12,6 @@ export function postLoginApi(loginForm) {
 
 // 获取用户信息
 export function queryUserinfoApi() {
-	console.log('调用了api')
 	return request({
 		method: 'GET',
 		url: '/user/userinfo',

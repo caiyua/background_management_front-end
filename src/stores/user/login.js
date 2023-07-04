@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { getItem, removeAllItem, setItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import { postLoginApi, queryUserinfoApi } from '@/api/user/login'
-import { setTimeStamp } from '@/utils/auth'
+import { setTimeStamp, setTokenExpiration } from '@/utils/auth'
 import router from '@/router'
 
 export const useLoginStore = defineStore('login', {
@@ -18,6 +18,7 @@ export const useLoginStore = defineStore('login', {
 				this.token = res.data.token
 				setItem(TOKEN, this.token) // 存token
 				setTimeStamp() // 存时间戳
+				setTokenExpiration(res.data.tokenExpiration) // 存token有效期
 				this.userinfo = res.data.userinfo
 				await router.push('/')
 				ElMessage.success('欢迎回来！' + this.userinfo.username)
@@ -37,16 +38,13 @@ export const useLoginStore = defineStore('login', {
 		},
 		// 获取用户信息
 		async fetchUserinfo() {
-			// try {
-			// 	this.userinfo = await queryUserinfoApi()
-			// 	console.log(this.userinfo)
-			// } catch (err) {
-			// 	console.log(err)
-			// 	ElMessage.error({ message: '获取用户信息失败...' })
-			// 	throw err
-			// }
-			const res = await queryUserinfoApi()
-			console.log(res)
+			try {
+				const { data } = await queryUserinfoApi()
+				this.userinfo = data
+				console.log(this.userinfo)
+			} catch (err) {
+				throw err
+			}
 		},
 	},
 })

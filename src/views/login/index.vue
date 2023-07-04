@@ -32,8 +32,8 @@
 					:disabled="isBtnClick"
 					:loading="isBtnClick"
 				>
-					{{ $t('login.elButtonText') }}</el-button
-				>
+					{{ $t('login.elButtonText') }}
+				</el-button>
 			</el-form>
 			<span style="font-size: 12px; color: #bbb; text-align: center; display: block; margin-top: 10px"
 				>用户名 admin 密码 123123</span
@@ -47,7 +47,6 @@ import Theme from '@/components/Theme/index.vue'
 import Languages from '@/components/Languages/index.vue'
 import { ref, watch } from 'vue'
 import { useLoginStore } from '@/stores/user/login'
-import router from '@/router'
 import {
 	passwordVerifyLength,
 	passwordVerifyRequired,
@@ -85,23 +84,20 @@ const submitForm = async (formEl) => {
 			isBtnClick.value = true
 			loginStore.sendLogin(loginForm.value).then((res) => {
 				// 登录成功后返回了200，失败返回401
+				if (res.status && res.status !== 200) {
+					setTimeout(() => {
+						isBtnClick.value = false
+					}, 1000)
+				}
 				if (res.status && res.status === 200) {
 					isBtnClick.value = false
 				}
-				if (res.status && res.status === 401) {
-					setTimeout(() => {
-						isBtnClick.value = false
-					}, 1500)
-				}
 			})
 		} else {
-			console.log('表单验证失败！', fields)
+			console.log('表单验证失败！')
 		}
 	})
 }
-
-// 按钮可点击状态
-const isBtnClick = ref(false)
 
 // 语言改变时，刷新页面
 const langStore = useLangStore()
@@ -111,4 +107,7 @@ watch(
 		window.location.reload()
 	}
 )
+
+// 按钮可点击状态
+const isBtnClick = ref(false)
 </script>
