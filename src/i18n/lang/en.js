@@ -13,7 +13,7 @@ export default {
 		foldTips: 'Collapse Menu',
 		unfoldTips: 'Expand Menu',
 		avatar: {
-			personalHomepage: 'Personal Homepage',
+			personalHomepage: 'Author blog',
 			logOut: 'Log Out',
 		},
 	},

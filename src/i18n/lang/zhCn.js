@@ -13,7 +13,7 @@ export default {
 		foldTips: '折叠菜单',
 		unfoldTips: '展开菜单',
 		avatar: {
-			personalHomepage: '个人主页',
+			personalHomepage: '作者博客',
 			logOut: '退出登录',
 		},
 	},

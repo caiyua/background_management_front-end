@@ -10,7 +10,9 @@
 		<template #dropdown>
 			<el-dropdown-menu>
 				<el-dropdown-item
-					><span>{{ $t('navbar.avatar.personalHomepage') }}</span></el-dropdown-item
+					><span
+						><a href="https://caiyua.github.io">{{ $t('navbar.avatar.personalHomepage') }}</a></span
+					></el-dropdown-item
 				>
 				<el-dropdown-item divided @click="handleLogout"
 					><span style="color: #ea3e66">{{ $t('navbar.avatar.logOut') }}</span></el-dropdown-item
@@ -51,7 +53,6 @@ const handleLogout = () => {
 }
 //endregion
 
-console.log()
 onMounted(() => {
 	loginStore.fetchUserinfo()
 })

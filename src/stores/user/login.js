@@ -40,6 +40,7 @@ export const useLoginStore = defineStore('login', {
 		async fetchUserinfo() {
 			try {
 				const { data } = await queryUserinfoApi()
+				console.log(data)
 				this.userinfo = data
 				console.log(this.userinfo)
 			} catch (err) {

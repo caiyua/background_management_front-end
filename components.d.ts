@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ContextMenu: typeof import('./src/components/TagsView/ContextMenu.vue')['default']
+    Countdown: typeof import('./src/components/Countdown/index.vue')['default']
     Crumbs: typeof import('./src/components/Crumbs/index.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
