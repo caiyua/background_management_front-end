@@ -84,12 +84,12 @@ const submitForm = async (formEl) => {
 			isBtnClick.value = true
 			loginStore.sendLogin(loginForm.value).then((res) => {
 				// 登录成功后返回了200，失败返回401
-				if (res.status && res.status !== 200) {
+				if (res && res.status && res.status !== 200) {
 					setTimeout(() => {
 						isBtnClick.value = false
 					}, 1000)
 				}
-				if (res.status && res.status === 200) {
+				if (res && res.status && res.status === 200) {
 					isBtnClick.value = false
 				}
 			})

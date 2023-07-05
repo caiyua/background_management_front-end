@@ -5,10 +5,11 @@
 <template>
 	<el-dropdown trigger="hover">
 		<div class="avatar_wrapper" style="cursor: pointer">
-			<el-avatar shape="circle" fit="cover" :src="loginStore.userinfo.handImg" />
+			<el-avatar shape="circle" fit="cover" :src="loginStore.userinfo.head_img" />
 		</div>
 		<template #dropdown>
 			<el-dropdown-menu>
+				<el-dropdown-item>个人主页</el-dropdown-item>
 				<el-dropdown-item
 					><span
 						><a href="https://caiyua.github.io">{{ $t('navbar.avatar.personalHomepage') }}</a></span
@@ -55,5 +56,6 @@ const handleLogout = () => {
 
 onMounted(() => {
 	loginStore.fetchUserinfo()
+	console.log(loginStore.userinfo)
 })
 </script>
