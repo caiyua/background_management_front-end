@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
 import { onMounted } from 'vue'
 const loginStore = useLoginStore()
 
@@ -56,6 +56,5 @@ const handleLogout = () => {
 
 onMounted(() => {
 	loginStore.fetchUserinfo()
-	console.log(loginStore.userinfo)
 })
 </script>

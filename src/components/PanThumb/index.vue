@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
 import { computed, ref } from 'vue'
 const loginStore = useLoginStore()
 

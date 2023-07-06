@@ -17,3 +17,11 @@ export function queryUserinfoApi() {
 		url: '/user/userinfo',
 	})
 }
+
+// 获取用户打卡信息
+export function queryUserPunchRecordsApi() {
+	return request({
+		method: 'GET',
+		url: '/user/punch-records',
+	})
+}

@@ -46,7 +46,7 @@
 import Theme from '@/components/Theme/index.vue'
 import Languages from '@/components/Languages/index.vue'
 import { ref, watch } from 'vue'
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
 import {
 	passwordVerifyLength,
 	passwordVerifyRequired,

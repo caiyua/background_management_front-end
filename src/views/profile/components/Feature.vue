@@ -5,34 +5,11 @@
 <template>
 	<div class="feature-container">
 		<el-timeline>
-			<el-timeline-item timestamp="2018/4/12" placement="top">
+			<el-timeline-item v-for="v in p" :timestamp="v.date" placement="top" :type="v.punch_in ? 'primary' : ''">
 				<el-card>
-					<h4>打卡成功</h4>
-					<p>（原因）未打卡时显示此条消息</p>
-				</el-card>
-			</el-timeline-item>
-			<el-timeline-item timestamp="2018/4/12" placement="top">
-				<el-card>
-					<h4>打卡成功</h4>
-					<p>（原因）未打卡时显示此条消息</p>
-				</el-card>
-			</el-timeline-item>
-			<el-timeline-item timestamp="2018/4/12" placement="top">
-				<el-card>
-					<h4>打卡成功</h4>
-					<p>（原因）未打卡时显示此条消息</p>
-				</el-card>
-			</el-timeline-item>
-			<el-timeline-item timestamp="2018/4/12" placement="top">
-				<el-card>
-					<h4>打卡成功</h4>
-					<p>（原因）未打卡时显示此条消息</p>
-				</el-card>
-			</el-timeline-item>
-			<el-timeline-item timestamp="2018/4/12" placement="top">
-				<el-card>
-					<h4>打卡成功</h4>
-					<p>（原因）未打卡时显示此条消息</p>
+					<h4 v-if="v.punch_in" style="color: #0087ff">打卡成功</h4>
+					<h4 v-else style="font-weight: bold">未打卡</h4>
+					<p v-if="!v.punch_in" style="margin-top: 5px">{{ v.reason }}</p>
 				</el-card>
 			</el-timeline-item>
 		</el-timeline>
@@ -40,6 +17,16 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
+import { computed, onMounted } from 'vue'
 const loginStore = useLoginStore()
+
+// 指代
+const p = computed(() => {
+	return loginStore.userPunchRecords
+})
+
+onMounted(() => {
+	loginStore.fetchUserPunchRecords()
+})
 </script>

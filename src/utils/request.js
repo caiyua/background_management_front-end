@@ -1,7 +1,7 @@
 // 引入axios
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
 import { isCheckTimeout } from '@/utils/auth'
 import { getItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
@@ -36,6 +36,9 @@ request.interceptors.response.use((response) => {
 	} else {
 		ElMessage.error('请求出错，状态码不是200，请前往控制台查看原因！')
 		console.log('出错的响应=> ', response.data)
+		if (response.status === 204) {
+			return response
+		}
 		return response.data
 	}
 })

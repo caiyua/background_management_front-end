@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
 import publicRoutes from './publicRoutes'
 import privateRoutes from './privateRoutes'
 

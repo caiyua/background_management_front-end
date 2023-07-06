@@ -93,7 +93,7 @@ import Feature from '@/views/profile/components/Feature.vue'
 import Chapter from '@/views/profile/components/Chapter.vue'
 import Author from '@/views/profile/components/Author.vue'
 import { computed, ref } from 'vue'
-import { useLoginStore } from '@/stores/user/login'
+import { useLoginStore } from '@/stores/user'
 const activeName = ref('feature')
 const loginStore = useLoginStore()
 

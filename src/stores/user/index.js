@@ -1,14 +1,15 @@
 import { defineStore } from 'pinia'
 import { getItem, removeAllItem, setItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
-import { postLoginApi, queryUserinfoApi } from '@/api/user/login'
+import { postLoginApi, queryUserinfoApi, queryUserPunchRecordsApi } from '@/api/user'
 import { setTimeStamp, setTokenExpiration } from '@/utils/auth'
 import router from '@/router'
 
 export const useLoginStore = defineStore('login', {
 	state: () => ({
 		token: getItem(TOKEN) || '',
-		userinfo: {}, // 用户信息
+		userinfo: {}, // 用户个人信息
+		userPunchRecords: {}, // 用户打卡信息
 	}),
 	actions: {
 		// 登进
@@ -30,6 +31,7 @@ export const useLoginStore = defineStore('login', {
 				}
 			}
 		},
+
 		// 登出
 		async logout() {
 			this.token = ''
@@ -37,12 +39,28 @@ export const useLoginStore = defineStore('login', {
 			removeAllItem()
 			await router.push('/login')
 		},
+
 		// 获取用户信息
 		async fetchUserinfo() {
 			try {
 				const { data } = await queryUserinfoApi()
 				this.userinfo = data.userinfo
 			} catch (err) {
+				throw err
+			}
+		},
+
+		// 获取打卡信息
+		async fetchUserPunchRecords() {
+			try {
+				const res = await queryUserPunchRecordsApi()
+				if (res.status === 204) {
+					this.userPunchRecords = null
+				}
+				this.userPunchRecords = res.data
+				console.log(this.userPunchRecords)
+			} catch (err) {
+				console.log('获取打卡信息失败')
 				throw err
 			}
 		},
