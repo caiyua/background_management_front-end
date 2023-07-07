@@ -46,7 +46,7 @@
 import Theme from '@/components/Theme/index.vue'
 import Languages from '@/components/Languages/index.vue'
 import { ref, watch } from 'vue'
-import { useLoginStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import {
 	passwordVerifyLength,
 	passwordVerifyRequired,
@@ -55,7 +55,7 @@ import {
 } from '@/views/login/verify'
 import { useLangStore } from '@/stores/lang'
 
-const loginStore = useLoginStore()
+const userStore = useUserStore()
 
 // 表单数据源
 const loginForm = ref({
@@ -82,7 +82,7 @@ const submitForm = async (formEl) => {
 	await formEl.validate((valid, fields) => {
 		if (valid) {
 			isBtnClick.value = true
-			loginStore.sendLogin(loginForm.value).then((res) => {
+			userStore.sendLogin(loginForm.value).then((res) => {
 				// 登录成功后返回了200，失败返回401
 				if (res && res.status && res.status !== 200) {
 					setTimeout(() => {

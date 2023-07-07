@@ -25,3 +25,11 @@ export function queryUserPunchRecordsApi() {
 		url: '/user/punch-records',
 	})
 }
+
+// 添加打卡信息
+export function addPunchCardApi(id, punch_in) {
+	return request({
+		method: 'GET',
+		url: `/user/add-records?id=${id}&punch_in=${punch_in}`,
+	})
+}

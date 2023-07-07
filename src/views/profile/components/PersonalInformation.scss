@@ -1,0 +1,6 @@
+.personal-information { margin: 20px 0;border: 1px solid var(--profile-card-border);border-bottom: 0;
+	.one { @extend .flex; padding: 15px 20px;border-bottom: 1px solid var(--profile-card-border);
+		.title { flex: 1;font-size: 16px;font-weight: 700;}
+		.value { flex: 2;font-size: 14px;}
+	}
+}

@@ -1,7 +1,7 @@
 // 引入axios
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { useLoginStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import { isCheckTimeout } from '@/utils/auth'
 import { getItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
@@ -17,12 +17,12 @@ const request = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use((config) => {
-	const loginStore = useLoginStore()
-	if (loginStore.token) {
+	const userStore = useUserStore()
+	if (userStore.token) {
 		config.headers = config.headers || {}
 		config.headers['Authorization'] = getItem(TOKEN)
 		if (isCheckTimeout()) {
-			loginStore.logout()
+			userStore.logout()
 			ElMessage.error('token过期，请重新登录')
 		}
 	}
@@ -36,6 +36,7 @@ request.interceptors.response.use((response) => {
 	} else {
 		ElMessage.error('请求出错，状态码不是200，请前往控制台查看原因！')
 		console.log('出错的响应=> ', response.data)
+		console.log(response.status)
 		if (response.status === 204) {
 			return response
 		}

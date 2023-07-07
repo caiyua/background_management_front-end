@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { getItem, removeAllItem, setItem } from '@/utils/storage'
 import { TOKEN } from '@/constant'
-import { postLoginApi, queryUserinfoApi, queryUserPunchRecordsApi } from '@/api/user'
+import { addPunchCardApi, postLoginApi, queryUserinfoApi, queryUserPunchRecordsApi } from '@/api/user'
 import { setTimeStamp, setTokenExpiration } from '@/utils/auth'
 import router from '@/router'
 
-export const useLoginStore = defineStore('login', {
+export const useUserStore = defineStore('user', {
 	state: () => ({
 		token: getItem(TOKEN) || '',
 		userinfo: {}, // 用户个人信息
@@ -61,6 +61,22 @@ export const useLoginStore = defineStore('login', {
 				console.log(this.userPunchRecords)
 			} catch (err) {
 				console.log('获取打卡信息失败')
+				throw err
+			}
+		},
+
+		// 添加打卡记录
+		async onToClockIn(punch_in) {
+			try {
+				const res = await addPunchCardApi(this.userinfo.id, punch_in)
+				if (punch_in) {
+					ElMessage.success(res.message)
+				} else {
+					ElMessage.error(res.message)
+				}
+				window.location.reload()
+				console.log(res)
+			} catch (err) {
 				throw err
 			}
 		},

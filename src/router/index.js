@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useLoginStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import publicRoutes from './publicRoutes'
 import privateRoutes from './privateRoutes'
 
@@ -10,9 +10,9 @@ const router = createRouter({
 
 // 路由拦截器
 router.beforeEach((to, from, next) => {
-	const useStore = useLoginStore()
+	const userStore = useUserStore()
 	// 已登录
-	if (useStore.token) {
+	if (userStore.token) {
 		if (to.path === '/login') {
 			next('/')
 			return

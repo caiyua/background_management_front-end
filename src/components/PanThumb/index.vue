@@ -5,16 +5,15 @@
 <template>
 	<div class="pan-thumb-container">
 		<div class="thumb-wrapper">
-			<el-avatar :size="150" :src="loginStore.userinfo.avatar" > </el-avatar>
+			<el-avatar :size="150" :src="userStore.userinfo.avatar"> </el-avatar>
 			<img class="hide-img" src="@/assets/avatar.jpg" alt="" />
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { useLoginStore } from '@/stores/user'
-import { computed, ref } from 'vue'
-const loginStore = useLoginStore()
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
 
 // defineProps({
 // 	image: {

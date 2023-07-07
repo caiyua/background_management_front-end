@@ -5,7 +5,7 @@
 <template>
 	<el-dropdown trigger="hover">
 		<div class="avatar_wrapper" style="cursor: pointer">
-			<el-avatar shape="circle" fit="cover" :src="loginStore.userinfo.head_img" />
+			<el-avatar shape="circle" fit="cover" :src="userStore.userinfo.head_img" />
 		</div>
 		<template #dropdown>
 			<el-dropdown-menu>
@@ -24,9 +24,9 @@
 </template>
 
 <script setup>
-import { useLoginStore } from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
-const loginStore = useLoginStore()
+const userStore = useUserStore()
 
 //region 退出登录选择
 const handleLogout = () => {
@@ -38,7 +38,7 @@ const handleLogout = () => {
 	})
 		// 退出登录
 		.then(() => {
-			loginStore.logout()
+			userStore.logout()
 			ElMessage({
 				type: 'warning',
 				message: '已退出登录！',
@@ -55,6 +55,6 @@ const handleLogout = () => {
 //endregion
 
 onMounted(() => {
-	loginStore.fetchUserinfo()
+	userStore.fetchUserinfo()
 })
 </script>
