@@ -54,11 +54,11 @@ export const useUserStore = defineStore('user', {
 		async fetchUserPunchRecords() {
 			try {
 				const res = await queryUserPunchRecordsApi()
+				console.log(res)
 				if (res.status === 204) {
 					this.userPunchRecords = null
 				}
 				this.userPunchRecords = res.data
-				console.log(this.userPunchRecords)
 			} catch (err) {
 				console.log('获取打卡信息失败')
 				throw err

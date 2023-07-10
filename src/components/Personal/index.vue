@@ -28,7 +28,9 @@ import { useUserStore } from '@/stores/user'
 import { onMounted } from 'vue'
 const userStore = useUserStore()
 
-//region 退出登录选择
+/*
+ * 退出登录选择
+ * */
 const handleLogout = () => {
 	ElMessageBox.confirm('确认退出登录吗？', '您好！XXX！', {
 		confirmButtonText: '确认',
@@ -48,11 +50,10 @@ const handleLogout = () => {
 		.catch(() => {
 			ElMessage({
 				type: 'success',
-				message: '已取消登录！',
+				message: '已取消退出登录！',
 			})
 		})
 }
-//endregion
 
 onMounted(() => {
 	userStore.fetchUserinfo()

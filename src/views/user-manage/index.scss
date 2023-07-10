@@ -1,9 +1,12 @@
 .user-mange-container {
 	.content { margin-top: 20px;
-		.el-table {
-			.table-avatar { width: 50px; height: 50px; border-radius: 50%;}
-			.el-tag { background-color: #e5f3ff;color: #257480;border: 1px solid rgba(177, 213, 238, 0.5);padding: 0 5px;margin: 0 5px;}
+		:deep(.custom-el-table) {
+			.el-table__inner-wrapper {
+				.el-table__body-wrapper {
+				
+				}
+			}
 		}
-		.pagination { @extend .flex; @extend .j_center;margin-top: 20px;}
+		.pagination-container { width: 100%; @extend .f_center;position: absolute;top: 1120px;}
 	}
 }

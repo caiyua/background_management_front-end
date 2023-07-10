@@ -11,92 +11,86 @@
 
 		<!-- Table -->
 		<div class="content">
-			<el-table class="el-table" :data="tableData" border highlight-current-row>
-				<!-- 索引 -->
-				<el-table-column label="#" type="index"></el-table-column>
-				<!-- 姓名 -->
-				<el-table-column label="姓名" prop="username"></el-table-column>
-				<!-- 手机号 -->
-				<el-table-column label="手机号" prop="mobile"></el-table-column>
-				<!-- 头像 -->
-				<el-table-column label="头像" align="center">
+			<!--
+					待解决Bug：切换分页的时候当前分页索引会出现一转而逝的变化，还是用后端来传递索引值吧。
+				-->
+			<el-table
+				:data="userManageStore.list"
+				border
+				header-align="center"
+				class="custom-el-table"
+				highlight-current-row
+			>
+				<el-table-column label="索引" header-align="center">
+					<template v-slot="{ $index }">{{
+						$index + 1 + (userManageStore.page - 1) * userManageStore.size
+					}}</template>
+				</el-table-column>
+				<el-table-column label="姓名" prop="username" header-align="center" />
+				<el-table-column label="手机号" prop="cellPhone" header-align="center" />
+				<el-table-column label="头像" prop="headImg" header-align="center" align="center">
 					<template v-slot="{ row }">
-						<el-image
-							class="table-avatar"
-							fit="cover"
-							:src="row.avatar"
-							:preview-src-list="[row.avatar]"
-						></el-image>
+						<el-image :src="row.headImg" fit="cover" style="width: 80px; height: 80px" />
 					</template>
 				</el-table-column>
-				<!-- 角色 -->
-				<el-table-column label="角色" prop="role">
-					<template #default="{ row }">
-						<el-tag class="el-tag" v-for="item in row.role" :key="item.id">
-							{{ item.title }}
-						</el-tag>
+				<el-table-column label="角色" prop="role" header-align="center" />
+				<el-table-column label="入职时间" header-align="center">
+					<template v-slot="{ row }">
+						<span style="font-size: 13px">
+							{{ row.onBoardTime.slice(0, 10) }}
+						</span>
 					</template>
 				</el-table-column>
-				<!-- 开通时间 -->
-				<el-table-column label="注册时间">
-					<template #default="{ row }">{{ $filters.dateFilter(row.openTime) }}</template>
-				</el-table-column>
-				<!-- 操作 -->
-				<el-table-column label="操作">
-					<template #default>
-						<el-button type="primary" size="small">查看</el-button>
-						<el-button type="info" size="small">角色</el-button>
-						<el-button type="danger" size="small">删除</el-button>
-					</template>
-				</el-table-column>
+				<el-table-column label="操作" prop="address" header-align="center"></el-table-column>
 			</el-table>
 
 			<!-- 分页器 -->
-			<el-pagination
-				class="pagination"
-				small
-				@size-change="handleSizeChange"
-				@current-change="handleCurrentChange"
-				:current-page="page"
-				:page-size="size"
-				:page-sizes="[5, 10, 20]"
-				layout="total, sizes, prev, next, pager, jumper"
-				:total="total"
-			></el-pagination>
+			<div class="pagination-container">
+				<el-pagination
+					background
+					v-model:current-page="userManageStore.page"
+					v-model:page-size="userManageStore.size"
+					:page-sizes="[2, 4, 6, 8]"
+					layout="total, sizes, prev, pager, next, jumper"
+					:total="userManageStore.total"
+					@size-change="handleSizeChange"
+					@current-change="handleCurrentChange"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { queryUserManageList } from '@/api/user/user-manage'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useUserManageStore } from '@/stores/user/user-manage'
+const userManageStore = useUserManageStore()
 
 /*
  * 表格数据
  * */
-const tableData = ref([])
-const total = ref(0) // 总页数
-const page = ref(1) // 当前页
-const size = ref(5) // 每页数据有几条
-// 获取数据的方法
 const getListData = async () => {
-	const result = await queryUserManageList({
-		page: page.value,
-		size: size.value,
-	})
-	tableData.value = result.list
-	page.value = result.page
-	size.value = result.size
-	total.value = result.total
-	console.log(tableData.value)
+	await userManageStore.getUserManageList()
 }
-getListData()
 
-const handleSizeChange = () => {}
-const handleCurrentChange = () => {}
+const handleSizeChange = (val) => {
+	userManageStore.size = val
+	userManageStore.page = 1 // 回到第一页
+	getListData()
+}
+const handleCurrentChange = (val) => {
+	userManageStore.page = val
+	getListData()
+}
 
-// 跳转excel页面
+onMounted(() => {
+	getListData()
+})
+
+/*
+ * 跳转excel导入页面
+ * */
 const router = useRouter()
 const toExcel = () => {
 	router.push('/user/import')
