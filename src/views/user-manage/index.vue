@@ -38,7 +38,7 @@
 					</template>
 				</el-table-column>
 				<!-- 开通时间 -->
-				<el-table-column label="时间">
+				<el-table-column label="注册时间">
 					<template #default="{ row }">{{ $filters.dateFilter(row.openTime) }}</template>
 				</el-table-column>
 				<!-- 操作 -->
@@ -59,7 +59,7 @@
 				@current-change="handleCurrentChange"
 				:current-page="page"
 				:page-size="size"
-				:page-sizes="[2, 5, 10, 20]"
+				:page-sizes="[5, 10, 20]"
 				layout="total, sizes, prev, next, pager, jumper"
 				:total="total"
 			></el-pagination>
@@ -72,11 +72,13 @@ import { ref } from 'vue'
 import { queryUserManageList } from '@/api/user/user-manage'
 import { useRouter } from 'vue-router'
 
-//region 表格数据
+/*
+ * 表格数据
+ * */
 const tableData = ref([])
 const total = ref(0) // 总页数
 const page = ref(1) // 当前页
-const size = ref(2) // 每页数据有几条
+const size = ref(5) // 每页数据有几条
 // 获取数据的方法
 const getListData = async () => {
 	const result = await queryUserManageList({
@@ -90,7 +92,7 @@ const getListData = async () => {
 	console.log(tableData.value)
 }
 getListData()
-//endregion
+
 const handleSizeChange = () => {}
 const handleCurrentChange = () => {}
 
