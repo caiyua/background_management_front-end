@@ -23,5 +23,8 @@ export const useUserManageStore = defineStore('user-manage', {
 				throw err
 			}
 		},
+		async addNewEmployee() {
+
+		},
 	},
 })

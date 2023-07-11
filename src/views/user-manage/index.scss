@@ -1,12 +1,14 @@
 .user-mange-container {
+	.header { width: 100%;height: auto;@extend .flex; @extend .j_between;}
 	.content { margin-top: 20px;
-		:deep(.custom-el-table) {
-			.el-table__inner-wrapper {
-				.el-table__body-wrapper {
-				
-				}
-			}
-		}
 		.pagination-container { width: 100%; @extend .f_center;position: absolute;top: 1120px;}
 	}
 }
+
+:deep(.custom-head-img) {width: 60px;height: 60px;@extend .center;}
+
+:deep(.custom-tag) { margin: 3px;}
+
+:deep(.el-table thead) {color: #555;}
+
+:deep(.el-table td.el-table__cell div) { font-size: 14px;}

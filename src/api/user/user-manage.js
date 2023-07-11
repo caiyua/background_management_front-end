@@ -7,3 +7,11 @@ export const queryUserManageList = (page, size) => {
 		method: 'GET',
 	})
 }
+
+// 添加员工
+export const createNewEmployeeApi = (data) => {
+	return request({
+		url: '/employee/create',
+		method: 'GET',
+	})
+}
