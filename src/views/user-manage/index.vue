@@ -7,7 +7,7 @@
 		<div class="header">
 			<div class="left">
 				<el-button @click="toExcel" text bg>excel导入</el-button>
-				<el-button text bg @click="addNewEmployee">新增员工</el-button>
+				<el-button text bg @click="dialogFormVisible = true">新增员工</el-button>
 			</div>
 			<div class="right">
 				<el-button text bg>导出</el-button>
@@ -16,9 +16,6 @@
 
 		<!-- Table -->
 		<div class="content">
-			<!--
-					待解决Bug：切换分页的时候当前分页索引会出现一转而逝的变化，还是用后端来传递索引值吧。
-				-->
 			<el-table
 				:data="userManageStore.list"
 				border
@@ -33,7 +30,7 @@
 				</el-table-column>
 				<el-table-column label="姓名" prop="username" align="center" />
 				<el-table-column label="手机号" prop="cellPhone" align="center" />
-				<el-table-column label="头像" prop="headImg" align="center">
+				<el-table-column label="头像" prop="headImg" align="center" class="custom-head-img-column">
 					<template v-slot="{ row }">
 						<el-image :src="row.headImg" fit="cover" class="custom-head-img" />
 					</template>
@@ -67,38 +64,53 @@
 		</div>
 
 		<!-- 弹框-->
-		<el-dialog v-model="dialogFormVisible" title="新增员工">
-			<el-form :model="form">
-				<el-form-item label="姓名"> <el-input v-model="form.name" autocomplete="off" /> </el-form-item>
-				<el-form-item label="手机号">
-					<el-input v-model="form.cellPhone" autocomplete="off" />
+		<el-dialog v-model="dialogFormVisible" title="新增员工" class="custom-dialog">
+			<el-form :model="form" label-position="right" scroll-to-error :rules="rules" ref="formRef">
+				<el-form-item label="姓名：" prop="username">
+					<el-input v-model.trim="form.username" autocomplete="off" maxlength="4" placeholder="请输入姓名" />
 				</el-form-item>
-				<el-form-item label="头像">
-					<el-upload
-						v-model:file-list="fileList"
-						class="upload-demo"
-						action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-						multiple
-						:on-preview="handlePreview"
-						:on-remove="handleRemove"
-						:before-remove="beforeRemove"
-						:limit="3"
-						:on-exceed="handleExceed"
-					>
-						<el-button type="success" text bg>点击上传</el-button>
-						<template #tip>
-							<div class="el-upload__tip">jpg/png files with a size less than 500KB.</div>
-						</template>
-					</el-upload>
+				<el-form-item label="手机号：" prop="cellPhone">
+					<el-input
+						class="no-spin-arrow"
+						v-model.trim="form.cellPhone"
+						autocomplete="off"
+						maxlength="11"
+						placeholder="请输入手机号"
+						type="tel"
+					/>
 				</el-form-item>
-				<el-form-item label="角色">
-					<el-cascader :options="options" :props="props2" clearable />
+				<!--<el-form-item label="头像：">-->
+				<!--	<el-upload-->
+				<!--		class="upload-demo"-->
+				<!--		method="post"-->
+				<!--		:headers="{ Authorization: userStore.token }"-->
+				<!--		action="http://localhost:3000/api/v1/upload/avatar"-->
+				<!--		:on-progress="handlePreview"-->
+				<!--		:auto-upload="false"-->
+				<!--		ref="uploadRef"-->
+				<!--		list-type="picture-card"-->
+				<!--		:limit="1"-->
+				<!--		drag-->
+				<!--		:on-error="errUpload"-->
+				<!--		:before-upload="handleBeforeUpload"-->
+				<!--	>-->
+				<!--		<el-button type="success" text style="font-size: 12px">点击 或 拖拽</el-button>-->
+				<!--	</el-upload>-->
+				<!--</el-form-item>-->
+				<el-form-item label="角色：" prop="roles">
+					<el-cascader
+						:options="options"
+						:props="props2"
+						clearable
+						@change="handleCascaderChange"
+						:show-all-levels="false"
+					/>
 				</el-form-item>
 			</el-form>
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button @click="dialogFormVisible = false">取消</el-button>
-					<el-button type="primary" @click="dialogFormVisible = false">提交</el-button>
+					<el-button type="primary" @click="addNewEmployee(formRef)">提交</el-button>
 				</span>
 			</template>
 		</el-dialog>
@@ -106,11 +118,13 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserManageStore } from '@/stores/user/user-manage'
-const userManageStore = useUserManageStore()
+import { useUserStore } from '@/stores/user'
 
+const userManageStore = useUserManageStore()
+const userStore = useUserStore()
 /*
  * 跳转excel导入页面
  * */
@@ -136,35 +150,64 @@ const handleCurrentChange = (val) => {
 	getListData()
 }
 
-onMounted(() => {
-	getListData()
-})
+getListData()
 
 /*
  * 新增员工
  * */
-const addNewEmployee = async () => {
-	dialogFormVisible.value = true
-	// await userManageStore.addNewEmployee()
+const handleCascaderChange = (val) => {
+	const values = val
+		.filter((item) => item[1] !== undefined)
+		.map((item) => item[1])
+		.filter((value) => !form.value.roles.includes(value))
+	form.value.roles.push(...values)
 }
 
 const dialogFormVisible = ref(false)
+const uploadRef = ref(null)
+const formRef = ref(null)
+/*
+ * 点击上传
+ * */
+const addNewEmployee = async (formRef) => {
+	await formRef.validate(async (valid) => {
+		if (valid) {
+			console.log(form.value)
+			try {
+				await userManageStore.InsertNewEmployee(form.value)
+				// uploadRef.value.submit()
+			} catch (err) {
+				throw err
+			}
+		}
+	})
+}
+
+/*
+ * 表单数据源
+ * */
 const form = ref({
-	name: '',
-	cellPhone: undefined,
-	headImg: '',
+	username: '萨瓦迪卡',
+	cellPhone: 1316666666,
 	roles: [],
 })
 
-const props1 = {
-	checkStrictly: true,
-}
+const rules = ref({
+	username: [
+		{ required: true, message: '姓名不能为空', trigger: 'blur' },
+		{ min: 2, max: 4, message: '姓名长度为2~4位', trigger: 'blur' },
+	],
+	cellPhone: [
+		{ required: true, message: '手机号不能为空', trigger: 'blur' },
+		{ min: 11, max: 11, message: '手机号长度为11位', trigger: 'blur' },
+		{ pattern: /^1[3456789]\d{9}$/, message: '手机号码格式不正确', trigger: 'blur' },
+	],
+	roles: [{ required: true, message: '角色不能为空', trigger: 'blur' }],
+})
 
-const props2 = {
-	multiple: true,
-	checkStrictly: true,
-}
-
+/*
+ * 角色选择
+ * */
 const options = [
 	{
 		value: '技术部',
@@ -205,10 +248,30 @@ const options = [
 		value: '策划部',
 		label: '策划部',
 		children: [
-			{ value: '产品运营', label: '产品运营' },
+			{ value: '产品策划', label: '产品策划' },
 			{ value: '活动策划', label: '活动策划' },
 			{ value: '内容策划', label: '内容策划' },
 		],
 	},
 ]
+
+const props2 = {
+	multiple: true,
+	checkStrictly: true,
+	expandTrigger: 'hover',
+}
+
+/*
+ * 头像处理
+ * */
+const handlePreview = (val) => {
+	console.log(val)
+}
+
+/*
+ * 上传失败
+ * */
+const errUpload = (val) => {
+	console.log(val)
+}
 </script>

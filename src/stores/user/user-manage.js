@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { queryUserManageList } from '@/api/user/user-manage'
 import { getItem, setItem } from '@/utils/storage'
 import { USER_MANAGE_SIZE } from '@/constant'
+import { createNewEmployeeApi } from '@/api/user/user-manage'
 
 export const useUserManageStore = defineStore('user-manage', {
 	state: () => ({
@@ -23,8 +24,14 @@ export const useUserManageStore = defineStore('user-manage', {
 				throw err
 			}
 		},
-		async addNewEmployee() {
-
+		async InsertNewEmployee(data) {
+			try {
+				const res = await createNewEmployeeApi(data)
+				console.log(res)
+			} catch (err) {
+				console.log(err)
+				ElMessage.error(err.response.data.message)
+			}
 		},
 	},
 })

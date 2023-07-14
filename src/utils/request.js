@@ -31,10 +31,10 @@ request.interceptors.request.use((config) => {
 
 // 响应拦截器
 request.interceptors.response.use((response) => {
-	if (response.data.status === 200) {
+	if (response.data.status === 200 || response.data.success === true) {
 		return response.data
 	} else {
-		ElMessage.error('请求出错，状态码不是200，请前往控制台查看原因！')
+		ElMessage.error('请求出错，请前往控制台查看原因！')
 		console.log('出错的响应=> ', response.data)
 		console.log(response.status)
 		if (response.status === 204) {

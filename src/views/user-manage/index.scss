@@ -5,10 +5,33 @@
 	}
 }
 
-:deep(.custom-head-img) {width: 60px;height: 60px;@extend .center;}
+:deep(.el-table_1_column_4) {
+	.cell { @extend .f_center;}
+}
+
+:deep(.custom-head-img) { width: 50px;height: 50px;}
 
 :deep(.custom-tag) { margin: 3px;}
 
 :deep(.el-table thead) {color: #555;}
 
 :deep(.el-table td.el-table__cell div) { font-size: 14px;}
+
+
+/* 弹框-级联选择器 */
+:deep(.custom-dialog) { padding: 20px 40px; width: 600px; border-radius: 10px;
+	.el-form {
+		.el-form-item {
+			.el-form-item__label { width: 70px;padding: 0;font-size: 14px;}
+			input { font-size: 14px;}
+		}
+	}
+}
+
+//:deep(.el-upload--picture-card) { --el-upload-picture-card-size: 128px;}
+:deep(.el-form-item__label) { margin-right: 10px;}
+:deep(.el-dialog__title) { padding-bottom: 3px;border-bottom: 2px solid #333;font-weight: 700;}
+:deep(.el-upload-dragger) { background-color: #fafafa;border-style: none; @extend .center;}
+:deep(.el-upload.el-upload--picture-card.is-drag) { position: relative;}
+
+

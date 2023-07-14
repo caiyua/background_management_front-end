@@ -12,6 +12,7 @@ export const queryUserManageList = (page, size) => {
 export const createNewEmployeeApi = (data) => {
 	return request({
 		url: '/employee/create',
-		method: 'GET',
+		method: 'POST',
+		data,
 	})
 }
