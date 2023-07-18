@@ -16,6 +16,7 @@ export const useUserManageStore = defineStore('user-manage', {
 			try {
 				const res = await queryUserManageList(this.page, this.size)
 				this.list = res.data.list
+				console.log(res.data.list)
 				this.total = res.data.total
 				this.page = res.data.page
 				this.size = res.data.size
@@ -27,7 +28,7 @@ export const useUserManageStore = defineStore('user-manage', {
 		async InsertNewEmployee(data) {
 			try {
 				const res = await createNewEmployeeApi(data)
-				console.log(res)
+				window.location.reload()
 			} catch (err) {
 				console.log(err)
 				ElMessage.error(err.response.data.message)

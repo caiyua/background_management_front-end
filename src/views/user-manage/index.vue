@@ -6,11 +6,11 @@
 	<div class="user-mange-container">
 		<div class="header">
 			<div class="left">
-				<el-button @click="toExcel" text bg>excel导入</el-button>
+				<!--<el-button @click="toExcel" text bg>excel导入</el-button>-->
 				<el-button text bg @click="dialogFormVisible = true">新增员工</el-button>
 			</div>
 			<div class="right">
-				<el-button text bg>导出</el-button>
+				<!--<el-button text bg>导出</el-button>-->
 			</div>
 		</div>
 
@@ -30,11 +30,11 @@
 				</el-table-column>
 				<el-table-column label="姓名" prop="username" align="center" />
 				<el-table-column label="手机号" prop="cellPhone" align="center" />
-				<el-table-column label="头像" prop="headImg" align="center" class="custom-head-img-column">
-					<template v-slot="{ row }">
-						<el-image :src="row.headImg" fit="cover" class="custom-head-img" />
-					</template>
-				</el-table-column>
+				<!--<el-table-column label="头像" prop="headImg" align="center" class="custom-head-img-column">-->
+				<!--	<template v-slot="{ row }">-->
+				<!--		<el-image :src="row.headImg" fit="cover" class="custom-head-img" />-->
+				<!--	</template>-->
+				<!--</el-table-column>-->
 				<el-table-column label="角色" align="center">
 					<template v-slot="{ row }"
 						><el-tag v-for="item in row.roles" class="custom-tag">{{ item }}</el-tag></template
@@ -45,7 +45,7 @@
 						{{ row.onBoardTime.slice(0, 10) }}
 					</template>
 				</el-table-column>
-				<el-table-column label="操作" prop="address" align="center"></el-table-column>
+				<!--<el-table-column label="操作" prop="address" align="center"></el-table-column>-->
 			</el-table>
 
 			<!-- 分页器 -->

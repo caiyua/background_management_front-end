@@ -42,5 +42,6 @@ const p = computed(() => {
 
 onMounted(() => {
 	userStore.fetchUserPunchRecords()
+    console.log(userStore.userPunchRecords)
 })
 </script>

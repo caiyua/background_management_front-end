@@ -10,9 +10,10 @@ export const queryUserManageList = (page, size) => {
 
 // 添加员工
 export const createNewEmployeeApi = (data) => {
+	const { username, cellPhone, roles } = data
 	return request({
-		url: '/employee/create',
-		method: 'POST',
+		url: `/employee/create?username=${username}&cellPhone=${cellPhone}&roles=${roles}`,
+		method: 'GET',
 		data,
 	})
 }

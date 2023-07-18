@@ -5,7 +5,7 @@
 <template>
 	<div class="pan-thumb-container">
 		<div class="thumb-wrapper">
-			<el-avatar :size="150" :src="userStore.userinfo.avatar"> </el-avatar>
+			<el-avatar :size="150" src="http://114.132.169.149/upload/default-avatar.svg"> </el-avatar>
 			<img class="hide-img" src="@/assets/avatar.jpg" alt="" />
 		</div>
 	</div>
